@@ -1,8 +1,28 @@
 
 export const initialState = {
+    smurfs:[], 
+    isLoading: false,
+    error:''
+    
 }
 
-const reducer = ()=>{
+const reducer = (state = initialState, action )=>{
+    // eslint-disable-next-line default-case
+    switch(action.type){
+        case 'FETCH_START':
+            return{...state,isLoading: true, error: ''}
+        case 'FETCH_SUCCESS':
+            return{...state, isLoading:false, smurfs: action.payload, error:''}
+        case 'FETCH_FAIL':
+            return{...state, isLoading:false, error: action.payload, smurfs: []}   
+        case 'ADD_SMURF':
+            return{...state, isLoading:false, smurfs:[...state.smurfs, action.payload], error:''}     
+        case 'SET_ERROR':
+            return{...state, isLoading: false, error:action.payload}    
+
+            default:
+                return state;
+    }
 }
 
 //**************DO NOT EDIT ANY CODE BEYOND THIS POINT**************//

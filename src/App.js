@@ -1,13 +1,18 @@
-import React, { Component } from "react";
-
+import React, { useEffect } from "react";
+import {useDispatch} from 'react-redux'
 import AddForm from './components/AddForm';
 import SmurfList from './components/SmurfList';
 import Header from './components/Header';
-
+import {fetchSmurfs}  from './actions';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 
 const App = ()=> {
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(fetchSmurfs())
+  }, [dispatch])
   return (
     <div className="App">
       <Header />
